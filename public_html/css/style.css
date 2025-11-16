@@ -1,0 +1,1001 @@
+/*===============================================
+  FILE: style.css
+  DESCRIPTION: Main stylesheet cho Quantum Leap Creative
+  AUTHOR: (AI Kỹ sư Full-Stack)
+  
+  TABLE OF CONTENTS:
+  1. RESET & GLOBAL VARIABLES
+  2. BASE & TYPOGRAPHY
+  3. UTILITY CLASSES (Container, Grid, Buttons)
+  4. HEADER & NAVIGATION
+  5. FOOTER
+  6. PAGE: TRANG CHỦ (Home)
+     - Hero
+     - Services (Home)
+     - Portfolio Highlight
+     - Testimonials
+     - CTA
+  7. PAGE: GIỚI THIỆU (About)
+     - Page Header
+     - About Us
+     - Team
+     - Process
+  8. PAGE: DỊCH VỤ (Services)
+     - Main Services
+  9. PAGE: DỰ ÁN (Portfolio)
+     - Filter
+     - Project Grid
+  10. PAGE: LIÊN HỆ (Contact)
+     - Contact Info & Form
+     - Map
+  11. ANIMATIONS & RESPONSIVE
+=================================================*/
+
+/* * 1. RESET & GLOBAL VARIABLES 
+ * (Mobile-First)
+ */
+:root {
+    /* Bảng màu */
+    --color-bg-primary: #FFFFFF;
+    --color-bg-secondary: #F8F9FA;
+    --color-text-primary: #212529;
+    --color-text-secondary: #6C757D;
+    --color-accent: #007BFF;
+    --color-success: #28A745;
+    --color-error: #DC3545;
+    --color-border: #DEE2E6;
+
+    /* Fonts */
+    --font-heading: 'Poppins', sans-serif;
+    --font-body: 'Inter', sans-serif;
+
+    /* Kích thước */
+    --header-height: 4.5rem; /* 72px */
+    --max-width: 1200px;
+    --border-radius: 8px;
+    --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* CSS Reset đơn giản */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 100%; /* 1rem = 16px */
+}
+
+body {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--color-text-primary);
+    background-color: var(--color-bg-primary);
+    -webkit-font-smoothing: antialiased;
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: var(--color-accent);
+    transition: var(--transition);
+}
+
+a:hover {
+    opacity: 0.8;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+input, button, textarea, select {
+    font: inherit;
+    border: none;
+}
+
+button {
+    cursor: pointer;
+    background: none;
+}
+
+/* * 2. BASE & TYPOGRAPHY 
+ */
+h1, h2, h3, h4 {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--color-text-primary);
+    margin-bottom: 0.75rem;
+}
+
+h1 { font-size: 2.5rem; } /* 40px */
+h2 { font-size: 2rem; }   /* 32px */
+h3 { font-size: 1.25rem; } /* 20px */
+h4 { font-size: 1.1rem; }
+
+p {
+    margin-bottom: 1rem;
+    color: var(--color-text-secondary);
+}
+
+.section {
+    padding: 4rem 0;
+}
+
+.section__title {
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+
+.section__subtitle {
+    text-align: center;
+    font-size: 1.1rem;
+    margin-bottom: 3rem;
+}
+
+.bg-light {
+    background-color: var(--color-bg-secondary);
+}
+
+/* * 3. UTILITY CLASSES 
+ */
+
+/* Container */
+.container {
+    max-width: var(--max-width);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+/* Grid System (Tự định nghĩa 12 cột) */
+.grid {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.grid-col-2 {
+    display: grid;
+    gap: 2rem;
+}
+
+.grid-col-3 {
+    display: grid;
+    gap: 2rem;
+}
+
+.grid-col-4 {
+    display: grid;
+    gap: 2rem;
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    padding: 0.75rem 1.75rem;
+    border-radius: 50px; /* Pill shape */
+    font-weight: 600;
+    font-family: var(--font-heading);
+    transition: var(--transition);
+    border: 2px solid transparent;
+    text-align: center;
+}
+
+.btn--primary {
+    background-color: var(--color-accent);
+    color: var(--color-bg-primary);
+}
+
+.btn--primary:hover {
+    background-color: #0056b3;
+    color: var(--color-bg-primary);
+    opacity: 1;
+    transform: translateY(-2px);
+}
+
+.btn--outline {
+    background-color: transparent;
+    color: var(--color-accent);
+    border-color: var(--color-accent);
+}
+
+.btn--outline:hover {
+    background-color: var(--color-accent);
+    color: var(--color-bg-primary);
+    opacity: 1;
+    transform: translateY(-2px);
+}
+
+.btn--light {
+    background-color: var(--color-bg-primary);
+    color: var(--color-accent);
+}
+
+.btn--light:hover {
+    background-color: var(--color-bg-secondary);
+    color: var(--color-accent);
+    opacity: 1;
+    transform: translateY(-2px);
+}
+
+/* * 4. HEADER & NAVIGATION 
+ */
+.header {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    background-color: var(--color-bg-primary);
+    transition: var(--transition);
+}
+
+.header.sticky {
+    background-color: var(--color-bg-primary);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.header__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: var(--header-height);
+}
+
+.header__logo {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+}
+.header__logo:hover { opacity: 1; }
+
+.header__toggle {
+    font-size: 1.5rem;
+    color: var(--color-text-primary);
+    display: block; /* Hiển thị trên mobile */
+}
+
+.nav {
+    position: fixed;
+    top: var(--header-height);
+    left: -100%; /* Ẩn menu */
+    width: 100%;
+    height: calc(100vh - var(--header-height));
+    background-color: var(--color-bg-primary);
+    padding: 2rem;
+    transition: var(--transition);
+    overflow-y: auto;
+}
+
+.nav.show-menu {
+    left: 0; /* Hiện menu */
+}
+
+.nav__list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.nav__link {
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+}
+
+.nav__link.active,
+.nav__link:hover {
+    color: var(--color-accent);
+}
+
+/* * 5. FOOTER 
+ */
+.footer {
+    background-color: var(--color-text-primary);
+    color: var(--color-bg-secondary);
+    padding-top: 4rem;
+}
+
+.footer__container {
+    display: grid;
+    gap: 2.5rem;
+}
+
+.footer__logo {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-bg-primary);
+    margin-bottom: 1rem;
+    display: inline-block;
+}
+.footer__logo:hover { opacity: 1; }
+
+.footer__description {
+    color: var(--color-text-secondary);
+    font-size: 0.9rem;
+}
+
+.footer__col-title {
+    color: var(--color-bg-primary);
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+
+.footer__list li {
+    margin-bottom: 0.5rem;
+}
+
+.footer__link {
+    color: var(--color-text-secondary);
+    font-size: 0.9rem;
+}
+.footer__link:hover {
+    color: var(--color-bg-primary);
+    padding-left: 5px;
+}
+
+.footer__list--contact {
+    color: var(--color-text-secondary);
+    font-size: 0.9rem;
+}
+
+.footer__list--contact li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.footer__icon {
+    width: 16px;
+    height: 16px;
+    color: var(--color-accent);
+}
+
+.footer__socials {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.footer__social-link {
+    font-size: 1.25rem;
+    color: var(--color-text-secondary);
+}
+.footer__social-link:hover {
+    color: var(--color-bg-primary);
+}
+
+.footer__bottom {
+    margin-top: 3rem;
+    padding: 1.5rem 0;
+    border-top: 1px solid #343a40; /* Màu tối hơn */
+}
+
+.footer__copyright {
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+    margin: 0;
+}
+
+
+/* * 6. PAGE: TRANG CHỦ (Home) 
+ */
+
+/* Hero */
+.hero {
+    padding: calc(var(--header-height) + 4rem) 0 4rem 0;
+    background-color: var(--color-bg-secondary);
+    text-align: center;
+}
+
+.hero__container {
+    max-width: 800px;
+}
+
+.hero__title {
+    font-size: 2.75rem; /* 44px */
+    margin-bottom: 1rem;
+}
+
+.hero__description {
+    font-size: 1.15rem;
+    margin-bottom: 2rem;
+}
+
+.hero__buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: center;
+}
+
+/* Services (Home) */
+.service-card {
+    background-color: var(--color-bg-primary);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    text-align: center;
+    transition: var(--transition);
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+}
+
+.service-card__icon {
+    width: 48px;
+    height: 48px;
+    color: var(--color-accent);
+    margin-bottom: 1.5rem;
+}
+
+.service-card__title {
+    margin-bottom: 0.5rem;
+}
+
+/* Portfolio Highlight */
+.project-card {
+    display: block;
+    background-color: var(--color-bg-primary);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: var(--transition);
+    color: var(--color-text-primary);
+}
+
+.project-card:hover {
+    opacity: 1;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.project-card:hover .project-card__image {
+    transform: scale(1.05);
+}
+
+.project-card__image {
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+    transition: var(--transition);
+}
+
+.project-card__content {
+    padding: 1.5rem;
+}
+
+.project-card__category {
+    font-size: 0.85rem;
+    color: var(--color-accent);
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.project-card__title {
+    font-size: 1.2rem;
+    margin-top: 0.25rem;
+    margin-bottom: 0;
+}
+
+.section__cta {
+    text-align: center;
+    margin-top: 3rem;
+}
+
+/* Testimonials */
+.testimonial-slider {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    min-height: 300px; /* Đảm bảo chiều cao */
+}
+
+.testimonial-slider__wrapper {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.testimonial-slide {
+    flex: 0 0 100%;
+    padding: 2rem;
+    text-align: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+.testimonial-slide.active {
+    opacity: 1;
+    visibility: visible;
+    position: relative;
+}
+
+.testimonial-slide__text {
+    font-size: 1.25rem;
+    font-style: italic;
+    color: var(--color-text-primary);
+    margin-bottom: 2rem;
+}
+
+.testimonial-slide__author {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.testimonial-slide__avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+.testimonial-slide__author-info {
+    text-align: left;
+}
+
+.testimonial-slide__name {
+    margin: 0;
+    font-size: 1.1rem;
+}
+.testimonial-slide__company {
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+}
+
+.testimonial-slider__nav {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.testimonial-slider__btn {
+    color: var(--color-accent);
+    padding: 0.5rem;
+    border-radius: 50%;
+    border: 1px solid var(--color-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.testimonial-slider__btn:hover {
+    background-color: var(--color-bg-secondary);
+}
+
+/* CTA */
+.cta {
+    background-color: var(--color-accent);
+    color: var(--color-bg-primary);
+    text-align: center;
+}
+
+.cta__container {
+    max-width: 800px;
+}
+
+.cta__title {
+    color: var(--color-bg-primary);
+    font-size: 2.25rem;
+}
+
+.cta__description {
+    color: var(--color-bg-primary);
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+}
+
+
+/* * 7. PAGE: GIỚI THIỆU (About) 
+ */
+
+/* Page Header */
+.page-header {
+    padding: calc(var(--header-height) + 3rem) 0 3rem 0;
+    background-color: var(--color-bg-secondary);
+    text-align: center;
+}
+
+.page-header__title {
+    font-size: 2.75rem;
+    margin-bottom: 0.5rem;
+}
+
+.page-header__subtitle {
+    font-size: 1.15rem;
+    color: var(--color-text-secondary);
+    margin: 0;
+}
+
+/* About Us */
+.about-us__content p {
+    font-size: 1.1rem;
+}
+
+.about-us__image img {
+    border-radius: var(--border-radius);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+}
+
+/* Team */
+.team-card {
+    text-align: center;
+}
+
+.team-card__image {
+    width: 100%;
+    max-width: 250px;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 0 auto 1rem auto;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.07);
+}
+
+.team-card__name {
+    margin-bottom: 0.25rem;
+}
+
+.team-card__title {
+    font-size: 0.9rem;
+    color: var(--color-accent);
+    font-weight: 500;
+}
+
+/* Process */
+.process-step {
+    text-align: center;
+    padding: 1.5rem;
+    position: relative;
+}
+
+.process-step__number {
+    position: absolute;
+    top: 0;
+    left: 1.5rem;
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--color-bg-secondary);
+    z-index: -1;
+}
+
+.process-step__icon {
+    width: 48px;
+    height: 48px;
+    color: var(--color-accent);
+    margin-bottom: 1.5rem;
+}
+
+.process-step__title {
+    margin-bottom: 0.5rem;
+}
+
+
+/* * 8. PAGE: DỊCH VỤ (Services) 
+ */
+.service-block {
+    align-items: center;
+    margin-bottom: 3rem;
+}
+
+.service-block:last-child {
+    margin-bottom: 0;
+}
+
+.service-block__icon-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.service-block__icon {
+    width: 80px;
+    height: 80px;
+    color: var(--color-accent);
+}
+
+.service-block__title {
+    font-size: 1.75rem;
+}
+
+.service-block__description {
+    font-size: 1.05rem;
+    margin-bottom: 1.5rem;
+}
+
+.service-block__list {
+    display: grid;
+    gap: 0.75rem;
+}
+
+.service-block__list li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.service-block__list i {
+    width: 18px;
+    height: 18px;
+    color: var(--color-success);
+}
+
+/* * 9. PAGE: DỰ ÁN (Portfolio) 
+ */
+.portfolio-filter {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 3rem;
+}
+
+.filter-btn {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    background-color: var(--color-bg-secondary);
+    color: var(--color-text-secondary);
+    transition: var(--transition);
+}
+
+.filter-btn:hover {
+    background-color: var(--color-border);
+}
+
+.filter-btn.active {
+    background-color: var(--color-accent);
+    color: var(--color-bg-primary);
+}
+
+.filter-item {
+    transition: var(--transition);
+}
+
+.filter-item.hide {
+    display: none;
+}
+
+/* * 10. PAGE: LIÊN HỆ (Contact) 
+ */
+.contact-info__list {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.contact-info__item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.contact-info__item i {
+    width: 24px;
+    height: 24px;
+    color: var(--color-accent);
+    margin-top: 0.25rem;
+}
+
+.contact-info__item h4 {
+    margin-bottom: 0.25rem;
+}
+.contact-info__item p {
+    margin: 0;
+}
+
+/* Form */
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.form__group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form__label {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.form__input {
+    width: 100%;
+    padding: 0.85rem 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+    background-color: var(--color-bg-primary);
+    transition: var(--transition);
+}
+
+.form__input:focus {
+    outline: none;
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 3px rgba(0,123,255,0.15);
+}
+
+.form__error-message {
+    display: none;
+    font-size: 0.85rem;
+    color: var(--color-error);
+    margin-top: 0.25rem;
+}
+
+.form__group.error .form__input {
+    border-color: var(--color-error);
+}
+
+.form__group.error .form__error-message {
+    display: block;
+}
+
+.form-message {
+    display: none;
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+.form-message.success {
+    display: block;
+    background-color: #e6f7ec;
+    color: var(--color-success);
+    border: 1px solid var(--color-success);
+}
+
+.form-message.error {
+    display: block;
+    background-color: #fde8e8;
+    color: var(--color-error);
+    border: 1px solid var(--color-error);
+}
+
+.map-section {
+    padding: 0;
+    line-height: 0; /* Loại bỏ khoảng trắng dưới iframe */
+}
+
+/* * 11. ANIMATIONS & RESPONSIVE 
+ */
+
+/* Scroll Animations */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.animate-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Responsive (Mobile-First) */
+
+/* Tablet (min-width: 768px) */
+@media (min-width: 768px) {
+    h1 { font-size: 3rem; } /* 48px */
+    h2 { font-size: 2.25rem; } /* 36px */
+
+    .container {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+
+    .section {
+        padding: 5rem 0;
+    }
+
+    /* Grid */
+    .grid-col-2 { grid-template-columns: repeat(2, 1fr); }
+    .grid-col-3 { grid-template-columns: repeat(2, 1fr); }
+    .grid-col-4 { grid-template-columns: repeat(2, 1fr); }
+
+    /* Header */
+    .header__toggle {
+        display: none; /* Ẩn hamburger */
+    }
+
+    .nav {
+        position: static;
+        width: auto;
+        height: auto;
+        background: none;
+        padding: 0;
+        left: 0;
+    }
+
+    .nav__list {
+        flex-direction: row;
+        gap: 2rem;
+    }
+    
+    .nav__link {
+        font-size: 1rem;
+    }
+
+    /* Footer */
+    .footer__container {
+        grid-template-columns: 2fr repeat(3, 1fr);
+        gap: 2rem;
+    }
+
+    /* Home */
+    .hero {
+        padding: calc(var(--header-height) + 6rem) 0 6rem 0;
+        text-align: left;
+    }
+    .hero__container { text-align: left; }
+    .hero__title { font-size: 3.5rem; } /* 56px */
+    .hero__buttons {
+        flex-direction: row;
+        justify-content: flex-start;
+    }
+    .grid-col-3 { grid-template-columns: repeat(3, 1fr); }
+
+    /* About */
+    .grid-col-4 { grid-template-columns: repeat(4, 1fr); }
+    .process-step__number { font-size: 4rem; }
+
+    /* Services */
+    .service-block {
+        grid-template-columns: 1fr 2fr;
+    }
+    .service-block--reversed {
+        grid-template-columns: 2fr 1fr;
+    }
+    .service-block--reversed .service-block__icon-wrapper {
+        order: 1; /* Di chuyển icon sang phải */
+    }
+}
+
+/* Desktop (min-width: 1024px) */
+@media (min-width: 1024px) {
+    h1 { font-size: 3.5rem; } /* 56px */
+    h2 { font-size: 2.5rem; } /* 40px */
+    
+    .section {
+        padding: 6rem 0;
+    }
+
+    /* Home */
+    .hero {
+        padding: calc(var(--header-height) + 8rem) 0 8rem 0;
+    }
+    .hero__title { font-size: 4rem; } /* 64px */
+
+    /* Contact */
+    .contact.section .grid-col-2 {
+        grid-template-columns: 1fr 1.5fr; /* Info nhỏ hơn Form */
+        gap: 4rem;
+    }
+}
